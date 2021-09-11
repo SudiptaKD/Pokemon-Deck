@@ -30,6 +30,9 @@ const useInfiniteScroll = (callback) => {
         e.preventDefault(); 
         handleScroll();
       }
+      else {
+        console.log("this makes me a click event, most likely")
+      }
   }
 
   return [isFetching, setIsFetching];
