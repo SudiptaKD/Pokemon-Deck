@@ -14,7 +14,7 @@ const Homepage = () => {
 
     const getPokemonList = async () => {
         let pokemonArray = [];
-        for(let i = 1; i <= 30; i ++){
+        for(let i = 1; i <= 10; i ++){
             pokemonArray.push(await getPokemonData(i));
         }
         setPokemon(pokemonArray);
