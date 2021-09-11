@@ -34,7 +34,6 @@ const Homepage = () => {
     async function getPokemonListAgain() {
         for(let j = 1 ; j <= 5; j ++){
             pokemonArray = pokemon;
-            console.log(i)
             pokemonArray.push(await getPokemonData(i));
             i++
         }
