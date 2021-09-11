@@ -28,7 +28,7 @@ const Homepage = () => {
         setPokemon(pokemonArray);
         setLoading(false);
     }
-
+    // value of i and pokemonArrey gets vanished outside the function. so need to call it from state again
     //FOr infinite Scroll
     i=counter; // assigning in state
     async function getPokemonListAgain() {

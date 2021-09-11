@@ -5,7 +5,12 @@ const useInfiniteScroll = (callback) => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll)
+    window.addEventListener('touchend', handleTouchEnd);
+    return () =>{ window.removeEventListener('scroll', handleScroll);
+                  window.removeEventListener('resize', handleScroll)
+                  window.removeEventListener('touchend', handleTouchEnd)
+            }
   }, []);
 
   useEffect(() => {
@@ -18,6 +23,11 @@ const useInfiniteScroll = (callback) => {
   function handleScroll() {
     if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isFetching) return;
     setIsFetching(true);
+  }
+
+  const handleTouchEnd = (e) => {
+    e.preventDefault(); 
+    handleScroll();
   }
 
   return [isFetching, setIsFetching];
