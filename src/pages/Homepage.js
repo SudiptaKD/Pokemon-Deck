@@ -6,19 +6,42 @@ import '../App.css';
 // Components
 import Pokemon from '../components/Pokemon';
 import Loader from '../components/Loader';
-
+import useInfiniteScroll from '../hooks/UseInfiniteScroll';
 const Homepage = () => {
 
     const [pokemon, setPokemon] = useState([]);
     const [loading, setLoading] = useState(true)
+    const [counter,setCounter] = useState(1)
 
+    //FOr infinite Scroll
+    const [isFetching, setIsFetching] = useInfiniteScroll(getPokemonListAgain);
+ 
+
+    var i =1;
+    var pokemonArray = [];
     const getPokemonList = async () => {
-        let pokemonArray = [];
-        for(let i = 1; i <= 10; i ++){
+        for( let k = 1 ; k <= 10; k ++){
             pokemonArray.push(await getPokemonData(i));
+            i++
         }
+        setCounter(i) // value geting refreshed everytime it gets out of function. so storing in state
         setPokemon(pokemonArray);
         setLoading(false);
+    }
+
+    //FOr infinite Scroll
+    i=counter; // assigning in state
+    async function getPokemonListAgain() {
+        for(let j = 1 ; j <= 5; j ++){
+            pokemonArray = pokemon;
+            console.log(i)
+            pokemonArray.push(await getPokemonData(i));
+            i++
+        }
+        setCounter(i)
+        setPokemon(pokemonArray);
+        //setLoading(false);
+        setIsFetching(false);
     }
 
     const getPokemonData = async (id) => {
@@ -32,6 +55,7 @@ const Homepage = () => {
         );
         return res;
     }
+ 
 
     useEffect(() => {
         getPokemonList();
