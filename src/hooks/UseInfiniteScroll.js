@@ -26,8 +26,10 @@ const useInfiniteScroll = (callback) => {
   }
 
   const handleTouchEnd = (e) => {
-    e.preventDefault(); 
-    handleScroll();
+    if (e.target.tagName !== "A") {
+        e.preventDefault(); 
+        handleScroll();
+      }
   }
 
   return [isFetching, setIsFetching];
