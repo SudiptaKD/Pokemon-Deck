@@ -5,7 +5,7 @@ const useInfiniteScroll = (callback) => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
+    //window.addEventListener('resize', handleScroll);
 
     //Scroll event didnt work in touch screen for inner height element. so tried touch event. this didn't work
     // window.addEventListener('touchstart', handleTouchEnd);
@@ -17,7 +17,7 @@ const useInfiniteScroll = (callback) => {
     // window.addEventListener('click', handleTouchEnd);
    
     return () =>{ window.removeEventListener('scroll', handleScroll);
-                   window.removeEventListener('resize', handleScroll);
+                   //window.removeEventListener('resize', handleScroll);
 
             //       window.removeEventListener('touchstart', handleTouchEnd);
             //       window.removeEventListener('touchmove', handleTouchEnd);
