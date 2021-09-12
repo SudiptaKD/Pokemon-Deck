@@ -38,12 +38,12 @@ const useInfiniteScroll = (callback) => {
 
   function handleScroll() {
     if (document.documentElement.scrollHeight - Math.abs(document.documentElement.scrollTop) <  //Finally worked on all screen
-       document.documentElement.clientHeight + 100) { 
+        document.documentElement.clientHeight + 100) { 
           setIsFetching(true); 
     }
-   else if (window.innerHeight + document.documentElement.scrollTop !==  //worked on desktop not on touch screen
-     document.documentElement.offsetHeight || isFetching) return;
-    setIsFetching(true);
+  //  else if (window.innerHeight + document.documentElement.scrollTop !==  //worked on desktop not on touch screen
+  //    document.documentElement.offsetHeight || isFetching) return;
+    //setIsFetching(true);
   }
 
   //For touch event, didnt work
