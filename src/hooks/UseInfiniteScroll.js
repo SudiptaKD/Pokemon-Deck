@@ -7,9 +7,11 @@ const useInfiniteScroll = (callback) => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleScroll)
     window.addEventListener('touchend', handleTouchEnd);
+    window.addEventListener('touchmove', handleTouchEnd);
     return () =>{ window.removeEventListener('scroll', handleScroll);
                   window.removeEventListener('resize', handleScroll)
                   window.removeEventListener('touchend', handleTouchEnd)
+                  window.removeEventListener('touchmove', handleTouchEnd)
             }
   }, []);
 
@@ -26,13 +28,9 @@ const useInfiniteScroll = (callback) => {
   }
 
   const handleTouchEnd = (e) => {
-    if (e.target.tagName !== "A") {
         e.preventDefault(); 
         handleScroll();
-      }
-      else {
-        console.log("this makes me a click event, most likely")
-      }
+      
   }
 
   return [isFetching, setIsFetching];

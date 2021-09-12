@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Alert } from 'react-bootstrap';
 import '../App.css';
 
 // Components
@@ -12,7 +12,8 @@ const Homepage = () => {
     const [pokemon, setPokemon] = useState([]);
     const [loading, setLoading] = useState(true)
     const [counter,setCounter] = useState(1)
-
+    const [loadingMore, setLoadingMore] = useState(false)
+    
     //FOr infinite Scroll
     const [isFetching, setIsFetching] = useInfiniteScroll(getPokemonListAgain);
  
@@ -32,6 +33,7 @@ const Homepage = () => {
     //FOr infinite Scroll
     i=counter; // assigning in state
     async function getPokemonListAgain() {
+        setLoadingMore(true)
         for(let j = 1 ; j <= 5; j ++){
             pokemonArray = pokemon;
             pokemonArray.push(await getPokemonData(i));
@@ -41,6 +43,7 @@ const Homepage = () => {
         setPokemon(pokemonArray);
         //setLoading(false);
         setIsFetching(false);
+        setLoadingMore(false)
     }
 
     const getPokemonData = async (id) => {
@@ -64,7 +67,7 @@ const Homepage = () => {
         <>
         {loading ? (
             <Loader />
-        ) : (
+        ) : ( <>
             <Row xl={5} lg={4} md={3} sm={2} xs={1}  >
                 {pokemon.map( p =>(
                     <Col key={p.data.name} >
@@ -72,6 +75,12 @@ const Homepage = () => {
                     </Col>
                 ))}
             </Row>
+            <Row className="justify-content-md-center" >
+                {loadingMore  && <Alert  variant="primary">
+                    Loading more... 
+                    </Alert>}
+            </Row>
+            </>
         )}
         </>
     )
